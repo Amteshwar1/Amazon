@@ -1,11 +1,15 @@
 package BasePackage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -40,8 +44,15 @@ public class BaseAmazonClass {
 			
 			else if (browsername.equals("chrome")) {
 				System.setProperty("webdriver.chrome.driver", "C:\\Users\\user\\Desktop\\chromedriver_win32 (2)\\chromedriver.exe");
-				driver=new ChromeDriver();
-			}
+				driver=new ChromeDriver();}
+		}
+		public static void screenshots(String Filename) {
+	       	 File file=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+	       	 try {FileUtils.copyFile(file,new File ("C:\\Users\\14373\\Desktop\\Eclipse Workspace\\ProjectAmazon\\src\\test\\java\\screenshots"+Filename+".jpg"));
+	         }
+	       	catch(IOException e) {
+	   		 e.printStackTrace();
+		}
 				
 		driver.manage().window().maximize();
 		driver.manage().timeouts().pageLoadTimeout(5, TimeUnit.SECONDS);
